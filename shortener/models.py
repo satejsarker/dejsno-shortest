@@ -1,8 +1,9 @@
 from __future__ import unicode_literals
-
+from django.conf import settings
 from django.db import models
 from .util import code_generator,create_shortcode
 
+SHORTCODE_MAX = getattr(settings, 'SHORTCODE_MAX',15)
 
 # Create your models here.
 class KirrURLManager(models.Manager):
@@ -26,7 +27,7 @@ class KirrURLManager(models.Manager):
 
 class KirrURL(models.Model):
     url=models.CharField(max_length=220)
-    shortcode=models.CharField(max_length=30,blank=True,null=True,unique=True)
+    shortcode=models.CharField(max_length=SHORTCODE_MAX,blank=True,null=True,unique=True)
     updated=models.DateTimeField(auto_now=True,null=True,blank=True)
     timestamp=models.DateTimeField(auto_now_add=True,null=True,blank=True)
     active=models.BooleanField(default=True)

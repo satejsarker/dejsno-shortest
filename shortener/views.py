@@ -5,7 +5,14 @@ from shortener.models import KirrURL
 
 #function base VIEW
 
+class HomeView(View):
+    def get(self,req,*args,**kwargs):
+        return render(req, "shortener/home.html", {})
 
+    def post(self, req, *args, **kwargs):
+        print(req.POST)
+        print(req.POST.get('url'))
+        return render(req, "shortener/home.html", {})
 
 def kirr_redirect_view(req, shortcode=None, *args,  **kwargs):
     

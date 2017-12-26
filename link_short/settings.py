@@ -24,8 +24,7 @@ SECRET_KEY = 'cf77&vy8p1hh0h!s@rwyh4%(trsb%f*xu16xrs%!4z(741iq&n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.satej.sarker', 'live.satej.com']
 
 
 # Application definition
@@ -37,10 +36,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'shortener'
+    'shortener',
+    'django_hosts',
 ]
 
 MIDDLEWARE = [
+    'django_hosts.middleware.HostsRequestMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -48,14 +49,18 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_hosts.middleware.HostsResponseMiddleware',
 ]
 
 ROOT_URLCONF = 'link_short.urls'
+ROOT_HOSTCONF = 'link_short.hosts'
+DEFAULT_HOST='www'
+DEFAULT_REDIRECT_URL = 'http://www.satej.sarker:8000'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,"templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,3 +124,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    "~/static/",
+   
+]
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+SHORTCODE_MAX=15
+SHORTCODE_MIN=6

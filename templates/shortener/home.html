@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>shortner app</title>
+</head>
+
+<body>
+    <div align="center" style="margin: 0 auto;">
+        <h2>{{title}}</h2>
+        </h2>
+        <form action="." method="post"> {% csrf_token %}
+            <!-- <input name="url" type="text" placeholder="Short your Url">
+            -->{{form.as_p}}
+            <input type="submit" value="ShortLine">
+
+        </form>
+
+    </div>
+</body>
+
+</html>

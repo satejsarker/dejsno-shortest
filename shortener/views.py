@@ -18,13 +18,26 @@ class HomeView(View):
     def post(self, req, *args, **kwargs):
        
         forms=SubmitUrlForm(req.POST)
-        if forms.is_valid():
-            print(forms.cleaned_data)
-        contex={
-            "title":"submit URL",
-            "form":forms
+        contex = {
+            "title": "submit URL",
+            "form": forms
         }
-        return render(req, "shortener/home.html",contex)
+        template = "shortener/home.html"
+        if forms.is_valid():
+            print(forms.cleaned_data.get('url'))
+            new_url=forms.cleaned_data.get('url')
+            obj,created=KirrURL.objects.get_or_create(url=new_url)
+            context={
+                "object":obj,
+                "created":created
+            }
+            if created:
+                template = "shortener/sucess.html"
+            else:
+                template = "shortener/already-created.html"
+        
+                template = "shortener/already-created.html"
+        return render(req,  template, context)
 
 def kirr_redirect_view(req, shortcode=None, *args,  **kwargs):
     

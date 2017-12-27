@@ -16,6 +16,5 @@ from shortener.views import kirr_redirect_view, kirrCBirect,HomeView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', HomeView.as_view()),
-    url(r'^a/(?P<shortcode>[\w-]+)/$', kirr_redirect_view),
-    url(r'^b/(?P<shortcode>[\w-]+)/$', kirrCBirect.as_view()),
+    url(r'^(?P<shortcode>[\w-]+)/$', kirrCBirect.as_view(),name="scode"),
 ]

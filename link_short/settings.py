@@ -55,7 +55,9 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'link_short.urls'
 ROOT_HOSTCONF = 'link_short.hosts'
 DEFAULT_HOST='www'
+
 DEFAULT_REDIRECT_URL = 'http://www.satej.sarker:8000'
+PARENT_HOST = "satej.sarker"
 
 TEMPLATES = [
     {

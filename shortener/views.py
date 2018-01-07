@@ -1,8 +1,11 @@
 from django.shortcuts import render,get_object_or_404,redirect
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseRedirect,Http404
 from django.views import View
 from shortener.models import KirrURL
 from .forms import SubmitUrlForm
+from analytices.models import ClickEvent
+
+
 
 #function base VIEW
 
@@ -62,7 +65,16 @@ def kirr_redirect_view(req, shortcode=None, *args,  **kwargs):
 
 class kirrCBirect(View):
     def get(self, req, shortcode=None, *args,  **kwargs):
-        obj = get_object_or_404(KirrURL, shortcode=shortcode)
-        return HttpResponse ("hello from Class view {sc}".format(sc=shortcode))
+        print(">>>>>>>>"+shortcode)
+        qs=KirrURL.objects.filter(shortcode__iexact=shortcode)
+        print(qs)
+        if qs.count() !=1 and not qs.exists():
+            raise Http404
+            
+        obj=qs.first()
+        # print(ClickEvent.objects.create_event(obj))
+        return HttpResponseRedirect(obj.url)
+        
+
     def post(self,req,*args,**kwargs):
         return HttpResponse()

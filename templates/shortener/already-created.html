@@ -1,10 +1,10 @@
-<div align="center" style="width:800px;margin:0 auto">
-    <h2>Exists already </h2>
+{% extends "base.html" %} {% block title %} {{object.shortcode}} {% endblock title %} {% block content %}
+<div align="center"  class="well">
+    <h2>Already Exsists </h2>
     <p>{{object.url}}</p>
+    <p> <a  class="btn btn-link" href="{{object.get_short_url}}">{{object.get_short_url}}</a>
 
-    <p>
-        <a href=" {{object.get_short_url}}">{{object.get_short_url}}</a>
     </p>
-
-    <a href="/">+ New</a>
+    <a href="/" class="btn btn-primary">+ New</a>
 </div>
+{% endblock content %}

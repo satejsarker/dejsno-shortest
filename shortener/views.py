@@ -59,7 +59,7 @@ def kirr_redirect_view(req, shortcode=None, *args,  **kwargs):
     if qs.exists() and qs.count() ==1:
         obj=qs.first()
         obj_url=obj.url
-    return HttpResponseRedirect(obj_url)
+    return HttpResponseRedirect(obj.url)
 
 #class base VIEW 
 

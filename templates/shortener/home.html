@@ -1,25 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %} {% block title %} {% block super %} {% endblock%} {% endblock title %} {% block content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>shortner app</title>
-</head>
 
-<body>
-    <div align="center" style="margin: 0 auto;">
+
+
+<div class="container">
+    <div class="row">
         <h2>{{title}}</h2>
         </h2>
-        <form action="." method="post"> {% csrf_token %}
-            <!-- <input name="url" type="text" placeholder="Short your Url">
-            -->{{form.as_p}}
-            <input type="submit" value="ShortLine">
 
+        <form action="." method="post" class="form-control"> {% csrf_token %}
+            <div class="col-md-12">
+                {{form.as_p}}
+                <!-- <input name="url" type="text" placeholder="Short your Url">
+            -->
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-success" value="ShortLine">
+                </div>
+
+
+            </div>
         </form>
 
-    </div>
-</body>
 
-</html>
+    </div>
+
+
+    {% endblock content %}
